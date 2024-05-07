@@ -1,0 +1,85 @@
+﻿@model IEnumerable<TeamsWebApp.Models.Message>
+
+@{
+    ViewData["Title"] = "ShowChats";
+    Layout = null;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var fromDate = $("input[name='fromDate']").val();
+            var toDate = $("input[name='toDate']").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Messages/ShowChats",
+                data: { fromDate: fromDate, toDate: toDate },
+                success: function (data) {
+                    $("#table-container").html(data); // Replace table content with fetched data
+                },
+                error: function () {
+                    alert("An error occurred while fetching data.");
+                }
+            });
+        });
+    });
+</script>
+
+<div id="table-container">
+
+    @using (Html.BeginForm("ShowChats", "Messages", FormMethod.Post))
+    {
+        <span> From: </span>
+        <input type="date" name="fromDate" />
+
+        <span> To: </span>
+        <input type="date" name="toDate" />
+
+        <input type="submit" value="Search" />
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDUserFrom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDUserTo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ChatText)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDUserFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDUserTo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChatText)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

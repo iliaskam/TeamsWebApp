@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<TeamsWebApp.Models.User>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
 }
 
-<h1>Index</h1>
+<h1>Users</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -17,9 +14,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserID)
             </th>
             <th></th>
         </tr>
@@ -32,16 +26,11 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+            </tr>
 }
     </tbody>
 </table>
+
+<p>
+    <a onclick="showPopup('@Url.Action("ShowChats","Messages", null,Context.Request.Scheme)','Users Chats')" class="btn btn-success text-white"><i class="fas fa-random"></i>Show Chats</a>
+</p>
