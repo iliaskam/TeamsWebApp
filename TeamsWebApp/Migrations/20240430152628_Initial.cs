@@ -29,8 +29,8 @@ namespace TeamsWebApp.Migrations
                 columns: new[] { "ID", "FullName" },
                 values: new object[,]
                 {
-                    { 1, "Josh Smith" },
-                    { 2, "Joe Johnson" }
+                    { 1, "John Smith" },
+                    { 2, "Jane Johnson" }
                 });
 
             migrationBuilder.CreateTable(
