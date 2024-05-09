@@ -17,7 +17,7 @@ namespace TeamsWebApp.Controllers
         // GET: Users
         public async Task<IActionResult> ShowChats()
         {
-            return View(await _context.tblDiscussion.ToListAsync());
+            return View(await _context.tblDiscussion.OrderBy(d => d.DateTime).ToListAsync());
         }
 
         [HttpPost]
